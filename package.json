@@ -1,0 +1,12 @@
+{
+  "name": "my-little-library",
+  "version": "1.0.0",
+  "private": true,
+  "description": "나의 서재 — 잘 지내냐고 물으면",
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node server.mjs"
+  },
+  "engines": { "node": ">=18" }
+}

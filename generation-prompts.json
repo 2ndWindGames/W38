@@ -1,0 +1,19 @@
+{
+  "mode": "built-in image_gen",
+  "assets": [
+    {
+      "name": "book-cover.png",
+      "intent": "edit",
+      "source_image": "User-selected cover option 1: mustard jar",
+      "prompt": "Use case: text-localization.\nAsset type: Korean literary book cover, portrait, edit target.\nInput image 1 is the exact edit target.\nMake ONLY this one text replacement: replace the existing small Korean subtitle \"생각이 많다는 말을 들었다\" with exactly \"대답이 조금 길어질 것 같다\".\nPreserve the original main title exactly as \"잘 지내냐고\" on the first line and \"물으면\" on the second line. Preserve its font, brush-like serif character shapes, size, position and dark brown ink color. The new subtitle must use the same small elegant Korean serif typeface, dark brown color, left alignment and position as the old subtitle.\nEverything else must remain unchanged: exact portrait aspect ratio, warm ivory paper texture, generous blank space, watercolor/pencil illustration of the yellow mustard jar with black lid on the refrigerator at bottom center, little container at left, soft blue shadows and warm afternoon window light at right. Keep the art, layout, placement, lighting, framing, colors, object proportions and textures unchanged. No additional text, objects, logos, watermark or border.\nExact replacement text (verbatim): \"대답이 조금 길어질 것 같다\".",
+      "output": "dist/assets/book-cover.png"
+    },
+    {
+      "name": "library-room.png",
+      "intent": "generate",
+      "source_image": null,
+      "prompt": "Use case: photorealistic-natural.\nAsset type: immersive background for the first screen of a literary reading web app, landscape 3:2 composition, one coherent room photograph.\nPrimary request: A modest, intimate Korean personal library / writing room, photographed with warm fine-grain film and a very subtle painterly texture. Dark walnut wood bookshelves around the room hold assorted well-loved vintage books with plain, unlettered spines. Cream plaster walls, delicate dust floating in afternoon sunlight entering from a window on the left. Warm, quiet, lived-in and understated, carefully observed material textures.\nComposition/framing: wide horizontal 3:2 image, calm frontal view with gentle natural perspective. Reserve generous clean deep brown/shadow negative space in the left upper-middle area for a website title that will be added later. In the center-right, a low broad walnut book shelf or cabinet has a clear empty horizontal top surface and visible space above it, intended for a single front-facing book that will be placed with HTML later. Do not put a featured book in this empty display spot. Surrounding books and modest room props should frame the clear center-right display area without crowding it. The lower shelf surface is grounded and believable. Left window light produces warm directional illumination and subtle shadows. Avoid a bright white hotspot behind the left text area.\nStyle/medium: refined warm film photograph with subtle painterly surface detail, realistic depth and grain, elegant muted cream, walnut, honey and shadow colors, no oversaturated orange, no excessive clutter.\nConstraints: no people, no readable text, no letters on books, no words, no logos, no watermark, no computer or phone screens, no UI, no posters with writing. This is only the room background, not a website mockup.",
+      "output": "dist/assets/library-room.png"
+    }
+  ]
+}

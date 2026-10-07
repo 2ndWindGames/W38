@@ -1,0 +1,15 @@
+* text=auto
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.mjs text eol=lf
+*.json text eol=lf
+*.jsonc text eol=lf
+*.md text eol=lf
+*.svg text eol=lf
+*.cmd text eol=crlf
+*.png binary
+*.ttf binary
+# Preserve the supplied manuscript and upstream font license byte for byte.
+dist/content/manuscript.txt -text -whitespace
+dist/assets/NanumMyeongjo-OFL.txt -text -whitespace
