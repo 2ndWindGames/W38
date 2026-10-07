@@ -39,9 +39,18 @@
         !closeButton || !openButton || !coverButton) return;
 
     const buttons = new Map();
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let lastShelfButton = null;
     let savedOverflow = null;
     let pointerStartedOnBackdrop = false;
+    let hiddenSource = null;
+    let coverFlight = null;
+    let previewVersion = 0;
+    let focusFrame = 0;
+
+    // Older markup may still contain this credit; attribution lives in the site footer.
+    dialog.querySelectorAll('#detail-book-author, .cover-author').forEach((node) => node.remove());
+    detailCover.querySelectorAll('img').forEach((art) => { art.alt = ''; });
 
     function element(tag, className, text) {
       const node = document.createElement(tag);
@@ -73,8 +82,7 @@
         title.style.whiteSpace = 'pre-line';
         type.append(
           title,
-          element('span', 'cover-subtitle', book.number),
-          element('span', 'cover-author', '김승제 지음')
+          element('span', 'cover-subtitle', book.number)
         );
         cover.append(type);
       }
@@ -112,9 +120,79 @@
       savedOverflow = null;
     }
 
+    function restoreSource() {
+      if (!hiddenSource) return;
+      const { node, value, priority, button } = hiddenSource;
+      if (value) node.style.setProperty('visibility', value, priority);
+      else node.style.removeProperty('visibility');
+      button.classList.remove('is-preview-source');
+      hiddenSource = null;
+    }
+
+    function stopFlight() {
+      if (!coverFlight) return;
+      const animation = coverFlight;
+      coverFlight = null;
+      animation.cancel();
+    }
+
+    function cleanUpPreview() {
+      ++previewVersion;
+      cancelAnimationFrame(focusFrame);
+      focusFrame = 0;
+      stopFlight();
+      restoreSource();
+      restoreScroll();
+      pointerStartedOnBackdrop = false;
+      delete dialog.dataset.previewState;
+    }
+
+    function settlePreview() {
+      stopFlight();
+      if (dialog.open) dialog.dataset.previewState = 'settled';
+    }
+
+    function flyCover(sourceBounds, version) {
+      const destination = coverButton.getBoundingClientRect();
+      if (reducedMotion.matches || typeof coverButton.animate !== 'function' ||
+          !sourceBounds.width || !sourceBounds.height || !destination.width || !destination.height) {
+        settlePreview();
+        return;
+      }
+
+      const x = sourceBounds.left - destination.left;
+      const y = sourceBounds.top - destination.top;
+      const scaleX = sourceBounds.width / destination.width;
+      const scaleY = sourceBounds.height / destination.height;
+      dialog.dataset.previewState = 'opening';
+      try {
+        const animation = coverButton.animate([
+          {
+            transformOrigin: '0 0',
+            transform: `translate3d(${x}px, ${y}px, 0) scale(${scaleX}, ${scaleY})`
+          },
+          { transformOrigin: '0 0', transform: 'translate3d(0, 0, 0) scale(1, 1)' }
+        ], { duration: 720, easing: 'cubic-bezier(0.18, 0.72, 0.2, 1)', fill: 'both' });
+        coverFlight = animation;
+        animation.finished.then(() => {
+          if (version !== previewVersion || coverFlight !== animation || !dialog.open) return;
+          settlePreview();
+        }).catch(() => {
+          // Closing, resizing, or choosing another book cancels this flight intentionally.
+        });
+      } catch {
+        settlePreview();
+      }
+    }
+
     function selectBook(book, button) {
+      cleanUpPreview();
+      const version = previewVersion;
+      const source = button.querySelector('.shelf-cover');
+      const sourceBounds = source.getBoundingClientRect();
       lastShelfButton = button;
       dialog.dataset.book = book.id;
+      dialog.dataset.ready = String(Boolean(book.ready));
       for (const [id, shelfButton] of buttons) {
         const selected = id === book.id;
         shelfButton.classList.toggle('is-selected', selected);
@@ -124,14 +202,14 @@
       applyColors(dialog, book);
       applyColors(detailCover, book);
       applyColors(coverButton, book);
-      const source = button.querySelector('.shelf-cover');
       detailCover.replaceChildren(...Array.from(source.childNodes, (node) => node.cloneNode(true)));
       detailCover.setAttribute('aria-hidden', 'true');
       setText('detail-book-kind', book.kind);
       setText('detail-book-title', book.title);
       setText('detail-book-subtitle', book.subtitle);
-      setText('detail-book-author', '김승제 지음');
       setText('detail-book-description', book.description);
+      setText('detail-book-quote', book.ready ? '나는 오래,\n말하지 못한 것들과 한 방에 살았다.' : '');
+      if ($('detail-book-quote')) $('detail-book-quote').hidden = !book.ready;
       setText('detail-book-status', book.ready ? '현재 원고 6장' : '새 이야기를 준비하고 있어요');
       setText('open-book-label', book.ready ? '책 펼치기' : '준비 중인 책');
       setText('resume-label', book.ready
@@ -143,8 +221,22 @@
 
       if (book.ready) window.dispatchEvent(new CustomEvent('w38:select-book'));
       if (!dialog.open) dialog.showModal();
+      // A reopened, scrollable preview always starts with the cover in view.
+      dialog.scrollTop = 0;
       lockScroll();
       closeButton.focus({ preventScroll: true });
+      if (book.ready) {
+        hiddenSource = {
+          node: source, button,
+          value: source.style.getPropertyValue('visibility'),
+          priority: source.style.getPropertyPriority('visibility')
+        };
+        source.style.setProperty('visibility', 'hidden');
+        button.classList.add('is-preview-source');
+        flyCover(sourceBounds, version);
+      } else {
+        dialog.dataset.previewState = 'settled';
+      }
     }
 
     function addEmptySlot(shelf) {
@@ -178,38 +270,54 @@
       if (index === 4) addEmptySlot(shelves[1]);
     });
     dialog.dataset.book = 'wellbeing';
+    dialog.dataset.ready = 'true';
 
-    closeButton.addEventListener('click', () => dialog.close());
+    function closePreview() {
+      // Release the flight immediately; native close is also used by the reader app.
+      if (!dialog.open) return;
+      settlePreview();
+      dialog.close();
+    }
 
-    function outsideDialog(event) {
-      const bounds = dialog.getBoundingClientRect();
-      return event.target === dialog && (
-        event.clientX < bounds.left || event.clientX > bounds.right ||
-        event.clientY < bounds.top || event.clientY > bounds.bottom
-      );
+    closeButton.addEventListener('click', closePreview);
+    dialog.addEventListener('cancel', (event) => {
+      event.preventDefault();
+      closePreview();
+    });
+
+    function isBackdrop(event) {
+      // The ready preview fills the viewport, so its empty inner space is backdrop too.
+      return event.target === dialog ||
+        event.target === dialog.querySelector('.book-detail-layout');
     }
 
     dialog.addEventListener('pointerdown', (event) => {
-      pointerStartedOnBackdrop = outsideDialog(event);
+      pointerStartedOnBackdrop = event.button === 0 && isBackdrop(event);
     });
     dialog.addEventListener('pointercancel', () => { pointerStartedOnBackdrop = false; });
     dialog.addEventListener('click', (event) => {
-      if (pointerStartedOnBackdrop && outsideDialog(event)) dialog.close();
+      if (pointerStartedOnBackdrop && isBackdrop(event)) closePreview();
       pointerStartedOnBackdrop = false;
     });
     dialog.addEventListener('close', () => {
       if (dialog.open) return;
-      pointerStartedOnBackdrop = false;
-      restoreScroll();
+      cleanUpPreview();
       const returnTarget = lastShelfButton;
-      requestAnimationFrame(() => {
-        if (!dialog.open && !isReading() && returnTarget?.isConnected) {
+      const version = previewVersion;
+      focusFrame = requestAnimationFrame(() => {
+        focusFrame = 0;
+        if (version === previewVersion && !dialog.open && !isReading() && returnTarget?.isConnected) {
           returnTarget.focus({ preventScroll: true });
         }
       });
     });
     window.addEventListener('hashchange', () => {
-      if (/^#read(?:\/|$)/.test(window.location.hash) && dialog.open) dialog.close();
+      if (/^#read(?:\/|$)/.test(window.location.hash) && dialog.open) closePreview();
+    });
+    // A viewport change invalidates FLIP coordinates; settle at the new layout immediately.
+    window.addEventListener('resize', () => { if (coverFlight) settlePreview(); });
+    reducedMotion.addEventListener('change', () => {
+      if (reducedMotion.matches && coverFlight) settlePreview();
     });
   }
 

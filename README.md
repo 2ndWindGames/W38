@@ -1,7 +1,7 @@
 # 나의 서재
 
 『잘 지내냐고 물으면 — 대답이 조금 길어질 것 같다』를 읽는 작은 웹앱입니다.
-두 단 선반에 원고가 있는 책 한 권과 ‘무제’ 더미 책 일곱 권, 빈자리 두 칸을 진열합니다. 책을 고르면 표지를 크게 보고 소개를 읽을 수 있고, 원고가 있는 책은 ‘책 펼치기’로 읽습니다. 표지 저자는 김승제입니다.
+두 단 선반에 원고가 있는 책 한 권과 ‘무제’ 더미 책 일곱 권, 빈자리 두 칸을 진열합니다. 책을 고르면 표지를 크게 보고 소개를 읽을 수 있고, 원고가 있는 책은 ‘책 펼치기’로 읽습니다. 읽을 수 있는 책은 선반에서 꺼내지는 움직임과 어두운 배경 속에서 핵심 문장과 소개를 보여 줍니다. 저자 표기는 사이트 우측 하단의 ‘지은이 망펭’으로 통일했습니다.
 
 ## 실행
 
@@ -25,7 +25,7 @@ Node.js 18 이상이 있으면 터미널에서 `npm start`로도 실행할 수 �
 - `dist/content/manuscript.json`: 책 제목·부제와 여섯 장의 표시용 데이터. 실제 화면을 수정하려면 이 JSON을 편집합니다.
 - 각 장의 `title`, `period`, `blocks`가 화면을 구성합니다. 블록 종류는 `paragraph`, `heading`, `note`, `verse`입니다.
 - 원문에 포함된 구성 메모와 여러 에필로그 초안도 남겨 두었습니다. 문장과 오탈자는 임의로 고치지 않았습니다.
-- `dist/assets/book-cover.png`: 선택한 1번 겨자 표지. 부제만 최신 원고에 맞췄습니다.
+- `dist/assets/book-cover.png`: 선택한 1번 겨자 표지. 기존 제목·부제를 유지하고 겨자 통의 표현을 다듬었습니다.
 - `dist/assets/library-room.png`: 서재 배경.
 - `dist/assets/NanumMyeongjo-Regular.ttf`: 본문용 나눔명조. [Google Fonts 원본](https://github.com/google/fonts/tree/main/ofl/nanummyeongjo)을 사용하며 라이선스는 같은 폴더의 `NanumMyeongjo-OFL.txt`에 있습니다.
 - `generation-prompts.json`: built-in imagegen으로 만든 이미지의 프롬프트와 출처 경로.

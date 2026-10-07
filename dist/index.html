@@ -54,7 +54,7 @@
       <p class="mobile-shelf-hint">선반을 옆으로 넘겨 다른 책도 만나 보세요 <span aria-hidden="true">↔</span></p>
     </main>
 
-    <footer class="library-footer"><span>어떤 이야기는, 조금 천천히 꺼내게 된다.</span><span class="footer-mark">MY LITTLE LIBRARY <span>✳</span></span></footer>
+    <footer class="library-footer"><span>어떤 이야기는, 조금 천천히 꺼내게 된다.</span><span class="site-author">지은이 망펭</span></footer>
   </section>
 
   <section id="reader-view" class="reader-view" hidden aria-label="책 읽기">
@@ -80,7 +80,7 @@
       <aside class="desktop-toc" aria-label="목차">
         <img src="./assets/book-cover.png" width="1024" height="1536" alt="" class="toc-cover">
         <p class="toc-book-title">잘 지내냐고 물으면</p>
-        <p class="toc-subtitle">대답이 조금 길어질 것 같다 · 김승제 지음</p>
+        <p class="toc-subtitle">대답이 조금 길어질 것 같다</p>
         <div class="toc-heading"><span>차례</span><span>CONTENTS</span></div>
         <nav id="desktop-chapter-list" class="chapter-list" aria-label="이야기 차례"></nav>
         <p class="reading-note">마지막으로 읽은 자리를<br>이 브라우저에 기억해 둘게요.</p>
@@ -100,7 +100,7 @@
       </main>
       <aside class="reading-position" aria-label="읽기 진행률"><span id="chapter-position">01 / 06</span><div class="position-rule"></div><span id="reading-percent">0%</span></aside>
     </div>
-    <footer class="reader-footer"><span>잘 지내냐고 물으면</span><span>나의 서재</span></footer>
+    <footer class="reader-footer"><span>잘 지내냐고 물으면</span><span class="site-author">지은이 망펭</span></footer>
   </section>
 
   <dialog id="book-dialog" class="book-dialog" data-book="wellbeing" aria-labelledby="detail-book-title" aria-describedby="detail-book-description">
@@ -108,7 +108,7 @@
     <div class="book-detail-layout">
       <div class="detail-cover-stage">
         <button id="cover-button" class="detail-cover-button" aria-label="잘 지내냐고 물으면 책 읽기">
-          <span id="detail-cover-art" class="detail-cover-art"><img class="shelf-cover-art" src="./assets/book-cover.png" width="1024" height="1536" alt="잘 지내냐고 물으면, 김승제 지음"></span>
+          <span id="detail-cover-art" class="detail-cover-art"><img class="shelf-cover-art" src="./assets/book-cover.png" width="1024" height="1536" alt="잘 지내냐고 물으면"></span>
         </button>
         <span class="detail-cover-shadow" aria-hidden="true"></span>
       </div>
@@ -116,7 +116,7 @@
         <p id="detail-book-kind" class="detail-book-kind">자전적 소설</p>
         <h2 id="detail-book-title">잘 지내냐고 물으면</h2>
         <p id="detail-book-subtitle" class="detail-book-subtitle">대답이 조금 길어질 것 같다</p>
-        <p id="detail-book-author" class="detail-book-author">김승제 지음</p>
+        <blockquote id="detail-book-quote" class="detail-book-quote" hidden></blockquote>
         <p id="detail-book-description" class="detail-book-description">나는 늘 내 몫이 필요했다. 나는 오래, 말하지 못한 것들과 한 방에 살았다.</p>
         <p id="detail-book-status" class="detail-book-status">여섯 개의 이야기를 읽을 수 있어요.</p>
         <button class="read-button" id="open-book"><span id="open-book-label">책 펼치기</span><svg class="icon"><use href="#i-arrow"/></svg></button>
