@@ -39,7 +39,7 @@ Cloudflare에서 GitHub 저장소를 연결한 뒤 다음과 같이 설정합니
 
 | 항목 | 값 |
 | --- | --- |
-| Project name | `w38` |
+| Project name | `book` |
 | Build command | 비워 두기 |
 | Deploy command | `npx wrangler deploy` |
 | Preview command | `npx wrangler preview` |
