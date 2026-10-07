@@ -1,0 +1,228 @@
+/* A small listening companion, using the reader's light and dark palettes. */
+body .reader-view {
+  padding-bottom: calc(140px + env(safe-area-inset-bottom, 0px));
+}
+
+body .reader-view:has(.music-settings:not([hidden])) {
+  padding-bottom: calc(270px + env(safe-area-inset-bottom, 0px));
+}
+
+.chapter-music {
+  position: fixed;
+  right: 28px;
+  bottom: 24px;
+  z-index: 25;
+  width: 320px;
+  max-width: calc(100vw - 24px);
+  max-height: calc(100dvh - 110px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 7px 28px #00000012;
+  font-family: var(--sans);
+  text-align: left;
+}
+
+.music-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.music-toggle,
+.music-settings-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  touch-action: manipulation;
+  transition: background-color .18s ease, color .18s ease;
+}
+
+.music-toggle {
+  background: var(--line);
+  color: var(--ink);
+}
+
+.music-toggle .icon,
+.music-settings-toggle .icon {
+  width: 19px;
+  height: 19px;
+}
+
+.music-toggle:hover:not(:disabled),
+.music-toggle[aria-pressed="true"],
+.music-toggle[data-state="playing"],
+.chapter-music[data-state="playing"] .music-toggle {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+.music-settings-toggle:hover,
+.music-settings-toggle[aria-expanded="true"] {
+  background: var(--line);
+  color: var(--ink);
+}
+
+.music-toggle[data-state="loading"],
+.chapter-music[data-state="loading"] .music-toggle {
+  cursor: progress;
+  opacity: .65;
+}
+
+.chapter-music button:focus-visible,
+.chapter-music a:focus-visible,
+.chapter-music input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.music-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.music-eyebrow {
+  margin: 0 0 3px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.4;
+  letter-spacing: .04em;
+}
+
+.music-title {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 14px;
+  line-height: 1.6;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.music-title:hover { text-decoration: underline; }
+
+.music-caption {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.music-status {
+  margin: 8px 0 0;
+  padding-left: 2px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.music-status:empty { display: none; }
+
+.music-settings {
+  margin-top: 11px;
+  padding: 11px 2px 0;
+  border-top: 1px solid var(--line);
+}
+
+.music-volume-label {
+  display: block;
+  color: var(--ink);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+#music-volume {
+  display: block;
+  width: 100%;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.music-credit {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.music-credit a,
+.music-all-credits {
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 3px;
+}
+
+.music-credit a:hover,
+.music-all-credits:hover { text-decoration-color: currentColor; }
+
+.music-all-credits {
+  display: inline-block;
+  margin-top: 5px;
+  padding: 4px 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+body[data-theme="dark"] .chapter-music { box-shadow: 0 7px 28px #00000030; }
+
+@media (max-width: 700px) {
+  .chapter-music {
+    right: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    left: 12px;
+    width: auto;
+    max-width: none;
+    max-height: calc(100dvh - 95px - env(safe-area-inset-bottom, 0px));
+    padding: 10px 12px;
+    border-radius: 8px;
+  }
+
+  .music-main { gap: 10px; }
+  .music-status { margin-top: 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .music-toggle,
+  .music-settings-toggle { transition: none; }
+}
+
+.music-volume-label output { float: right; color: var(--muted); }
+body:has(.chapter-music:not([hidden])) .app-status { bottom: 170px; }
+.credits-main { max-width: 720px; margin: 0 auto; padding: 60px 28px 80px; font-family: var(--serif); line-height: 1.9; }
+.credits-back { font-family: var(--sans); font-size: 12px; color: var(--muted); }
+.credits-eyebrow { font-size: 12px; color: var(--accent); margin: 55px 0 14px; }
+.credits-main h1 { font-size: 32px; font-weight: 400; margin: 0 0 20px; }
+.credits-main > p { font-size: 14px; }
+.credits-list { list-style: none; padding: 0; margin: 42px 0; }
+.credits-list li { padding: 26px 0; border-top: 1px solid var(--line); }
+.credits-list h2 { font-size: 22px; font-weight: 400; margin: 6px 0; }
+.credits-list p { margin: 6px 0; font-size: 13px; }
+.credits-list .credits-chapter { font-size: 11px; color: var(--accent); font-family: var(--sans); }
+.credits-list .credits-attribution, .credits-main .credits-note { font-size: 11px; color: var(--muted); }
+.credits-main a { text-decoration: underline; text-underline-offset: 4px; }

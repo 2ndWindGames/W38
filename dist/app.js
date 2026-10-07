@@ -89,7 +89,11 @@
     const headerHeight = document.querySelector('.reader-header').getBoundingClientRect().height;
     const top = rect.top + window.scrollY;
     const start = Math.max(0, top - headerHeight - 20);
-    const end = Math.max(start, top + rect.height - window.innerHeight + 32);
+    const music = document.getElementById('chapter-music');
+    const musicBounds = music && !music.hidden ? music.getBoundingClientRect() : null;
+    const overlapsText = musicBounds && musicBounds.left < rect.right && musicBounds.right > rect.left;
+    const visibleBottom = overlapsText ? Math.min(window.innerHeight, musicBounds.top) : window.innerHeight;
+    const end = Math.max(start, top + rect.height - visibleBottom + 32);
     return { start, end };
   }
 
@@ -261,6 +265,8 @@
     ui['current-chapter-label'].textContent = chapter.title;
     ui['chapter-position'].textContent = `${String(index + 1).padStart(2, '0')} / ${String(state.book.chapters.length).padStart(2, '0')}`;
     renderBody(chapter, index);
+    ui['reader-view'].dataset.chapter = chapter.id;
+    window.dispatchEvent(new CustomEvent('w38:reader-change'));
     document.querySelectorAll('.chapter-link').forEach((link) => {
       if (link.dataset.chapter === chapter.id) link.setAttribute('aria-current', 'page');
       else link.removeAttribute('aria-current');
@@ -285,6 +291,8 @@
     closeSettings();
     closeToc();
     ui['reader-view'].hidden = true;
+    delete ui['reader-view'].dataset.chapter;
+    window.dispatchEvent(new CustomEvent('w38:reader-change'));
     ui['library-view'].hidden = false;
     document.querySelector('.skip-link').setAttribute('href', '#main-content');
     document.title = `나의 서재 · ${state.book?.title || '잘 지내냐고 물으면'}`;

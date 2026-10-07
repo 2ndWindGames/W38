@@ -1,0 +1,14 @@
+{
+  "artist": "Scott Buckley",
+  "artistUrl": "https://www.scottbuckley.com.au",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "tracks": {
+    "mustard": { "title": "In This Moment", "caption": "혼자 남은 저녁, 오래 머무는 마음", "src": "./assets/music/in-this-moment.mp3", "page": "https://www.scottbuckley.com.au/library/in-this-moment/", "download": "https://www.scottbuckley.com.au/library/wp-content/uploads/2026/08/InThisMoment.mp3" },
+    "icecream": { "title": "Ice Cream", "caption": "잠들지 못했던, 즐거운 밤들", "src": "./assets/music/ice-cream.mp3", "page": "https://www.scottbuckley.com.au/library/ice-cream/", "download": "https://www.scottbuckley.com.au/library/wp-content/uploads/2023/08/IceCream.mp3" },
+    "gimbap": { "title": "The Long Dark", "caption": "문 너머로 삼켰던 말들", "src": "./assets/music/the-long-dark.mp3", "page": "https://www.scottbuckley.com.au/library/the-long-dark/", "download": "https://www.scottbuckley.com.au/library/wp-content/uploads/2023/01/TheLongDark.mp3" },
+    "meal": { "title": "A Kind Of Hope", "caption": "지친 하루에도 남아 있던 꿈", "src": "./assets/music/a-kind-of-hope.mp3", "page": "https://www.scottbuckley.com.au/library/a-kind-of-hope/", "download": "https://www.scottbuckley.com.au/library/wp-content/uploads/2022/10/AKindOfHope.mp3" },
+    "two-servings": { "title": "Moonlight", "caption": "맞은편에 한 그릇을 더 놓는 저녁", "src": "./assets/music/moonlight.mp3", "page": "https://www.scottbuckley.com.au/library/moonlight/", "download": "https://www.scottbuckley.com.au/library/wp-content/uploads/2022/07/Moonlight.mp3" },
+    "my-share": { "title": "With These Hands", "caption": "내 앞의 한 그릇, 그리고 다음 문장", "src": "./assets/music/with-these-hands.mp3", "page": "https://www.scottbuckley.com.au/library/with-these-hands/", "download": "https://www.scottbuckley.com.au/library/wp-content/uploads/2026/06/WithTheseHands.mp3" }
+  }
+}

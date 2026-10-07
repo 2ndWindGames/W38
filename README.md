@@ -49,3 +49,13 @@ Cloudflare에서 GitHub 저장소를 연결한 뒤 다음과 같이 설정합니
 [공식 설정 안내](https://developers.cloudflare.com/workers/ci-cd/builds/configuration/)
 
 음원은 포함하지 않았습니다.
+
+## 챕터 배경음악
+
+- 각 장에 Scott Buckley의 연주곡을 연결했습니다. 첫 진입은 무음이며 재생 버튼을 눌러 시작합니다.
+- 재생 중 장을 넘기면 페이드아웃 후 새 곡을 페이드인합니다. 서재로 나오면 정지합니다. 음량만 브라우저에 저장합니다.
+- 곡 연결·설명·원본 출처는 `dist/content/music.json`, 플레이어는 `dist/music.js`와 `dist/music.css`입니다.
+- 음원은 `dist/assets/music/`의 수정하지 않은 공식 MP3입니다. 재생 전에는 음원을 다운로드하지 않습니다.
+- 모든 곡은 Scott Buckley의 CC BY 4.0 작품이며, 화면의 음악 설정과 `dist/music-credits.html`에 저작자·출처·라이선스를 표시합니다.
+- 공식 사용 안내: https://www.scottbuckley.com.au/library/using-this-music/
+- 로컬 서버도 MP3 MIME과 바이트 범위 응답을 지원합니다.

@@ -10,6 +10,8 @@
   <link rel="preload" href="./assets/NanumMyeongjo-Regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="stylesheet" href="./styles.css">
   <link rel="stylesheet" href="./shelf.css">
+  <link rel="stylesheet" href="./music.css">
+  <script src="./music.js" defer></script>
   <script src="./app.js" defer></script>
   <script src="./shelf.js" defer></script>
 </head>
@@ -23,6 +25,9 @@
     <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 15A8.5 8.5 0 0 1 9 4a8.5 8.5 0 1 0 11 11Z"/></symbol>
     <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
     <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 1v2m0 18v2M1 12h2m18 0h2M4 4l1.5 1.5m13 13L20 20M4 20l1.5-1.5m13-13L20 4"/></symbol>
+    <symbol id="i-music-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></symbol>
+    <symbol id="i-music-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+    <symbol id="i-music-volume" viewBox="0 0 24 24"><path d="m11 4-6 5H2v6h3l6 5V4Zm4 4c2 2 2 6 0 8m3-11c4 4 4 10 0 14"/></symbol>
   </svg>
 
   <section id="library-view" class="library-view" aria-label="나의 서재">
@@ -100,6 +105,21 @@
       </main>
       <aside class="reading-position" aria-label="읽기 진행률"><span id="chapter-position">01 / 06</span><div class="position-rule"></div><span id="reading-percent">0%</span></aside>
     </div>
+    <section id="chapter-music" class="chapter-music" aria-label="이야기와 함께 듣는 음악" data-state="paused" hidden>
+      <div class="music-main">
+        <button id="music-toggle" class="music-toggle" type="button" aria-label="배경음악 재생" aria-pressed="false"><svg class="icon" aria-hidden="true"><use id="music-toggle-icon" href="#i-music-play"/></svg></button>
+        <div class="music-info"><p class="music-eyebrow">이 장의 음악</p><a id="music-title" class="music-title" href="./music-credits.html" target="_blank" rel="noopener"></a><p id="music-caption" class="music-caption"></p></div>
+        <button id="music-settings-toggle" class="music-settings-toggle" type="button" aria-label="음악 음량과 정보" aria-expanded="false" aria-controls="music-settings"><svg class="icon" aria-hidden="true"><use href="#i-music-volume"/></svg></button>
+      </div>
+      <div id="music-settings" class="music-settings" hidden>
+        <label class="music-volume-label" for="music-volume">음량 <output id="music-volume-value" for="music-volume">24%</output></label>
+        <input id="music-volume" type="range" min="0" max="100" step="1" value="24">
+        <p class="music-credit">Music by <a href="https://www.scottbuckley.com.au" target="_blank" rel="noopener">Scott Buckley</a> — <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a></p>
+        <a class="music-all-credits" href="./music-credits.html" target="_blank" rel="noopener">모든 음악과 출처 보기</a>
+      </div>
+      <p id="music-status" class="music-status" role="status" aria-live="polite">재생을 누르면 음악이 시작돼요.</p>
+      <audio id="chapter-audio" preload="none" loop hidden></audio>
+    </section>
     <footer class="reader-footer"><span>잘 지내냐고 물으면</span><span class="site-author">지은이 망펭</span></footer>
   </section>
 
