@@ -183,7 +183,7 @@
   }
 
   function updateResumeLabel() {
-    if (!state.book) return;
+    if (!state.book || $('book-dialog').dataset.book !== 'wellbeing') return;
     const chapter = chapterById(saved.lastChapter);
     ui['open-book-label'].textContent = chapter ? '이어서 읽기' : '책 펼치기';
     ui['resume-label'].textContent = chapter
@@ -318,6 +318,7 @@
   }
 
   function openBook() {
+    if ($('book-dialog').open) $('book-dialog').close();
     if (state.load === 'error') {
       location.assign(TEXT_URL);
       return;
@@ -394,6 +395,14 @@
   paintProgress(0);
   ui['open-toc'].setAttribute('aria-controls', 'toc-dialog');
   ui['open-toc'].setAttribute('aria-expanded', 'false');
+  window.addEventListener('w38:select-book', () => {
+    if (state.load === 'error') {
+      ui['open-book-label'].textContent = '원고 텍스트 읽기';
+      ui['resume-label'].textContent = '화면을 불러오지 못했어요. 텍스트 원고를 열 수 있어요.';
+    } else if (state.load === 'loading') {
+      ui['open-book-label'].textContent = '원고 불러오는 중…';
+    } else updateResumeLabel();
+  });
   ui['open-book'].addEventListener('click', openBook);
   ui['cover-button'].addEventListener('click', openBook);
   window.addEventListener('hashchange', () => route());

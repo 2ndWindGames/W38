@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600" fill="none">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="400" y2="600" gradientUnits="userSpaceOnUse"><stop stop-color="#405466"/><stop offset="1" stop-color="#2E4050"/></linearGradient>
+    <linearGradient id="sky" x1="0" y1="290" x2="0" y2="475" gradientUnits="userSpaceOnUse"><stop stop-color="#A7B1AD"/><stop offset="1" stop-color="#CFB99C"/></linearGradient>
+    <clipPath id="window"><path d="M99 275H306V474H99z"/></clipPath>
+  </defs>
+  <path fill="url(#paper)" d="M0 0h400v600H0z"/>
+  <path fill="#182A38" fill-opacity=".22" d="M0 0h15v600H0z"/>
+  <path stroke="#E8DECC" stroke-opacity=".15" d="M18.5 0v600M398.5 0v600"/>
+  <path fill="#253747" d="M82 262h237v224H82z"/>
+  <path fill="url(#sky)" d="M99 275h207v199H99z"/>
+  <g clip-path="url(#window)">
+    <circle cx="246" cy="354" r="43" fill="#E8CF9E"/>
+    <path fill="#7A8B8C" d="M96 399c52-8 107-4 155-15 23-5 38-3 62 0v93H96z"/>
+    <path fill="#657A80" d="M89 427c68-19 135 15 229-16v72H89z"/>
+    <path stroke="#E7D5B3" stroke-opacity=".48" d="M171 407h59m9 0h25m-82 8h59m-36 9h39"/>
+  </g>
+  <path stroke="#304452" stroke-width="9" d="M201 272v206M95 385h215"/>
+  <path stroke="#CECCBA" stroke-opacity=".45" d="M91 269h221v210H91z"/>
+  <path fill="#9EA19A" d="m82 486 20 9h237l-20-9z"/>
+  <path stroke="#C0BEAD" stroke-opacity=".3" d="M83 514h238"/>
+</svg>

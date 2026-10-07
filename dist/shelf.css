@@ -1,0 +1,139 @@
+/* The library is a cabinet of books. Reading styles remain in styles.css. */
+.library-view { background: #29291f; }
+.room-image { background-attachment: fixed; filter: saturate(.72); }
+.room-shade { background: linear-gradient(90deg, #1b241cdd, #23271c9c 60%, #20241dbd), linear-gradient(0deg, #20241bd9, #20241b42 65%); }
+.library-header { height: 86px; flex-shrink: 0; }
+.library-main.shelf-library { display: block; width: 100%; max-width: 1300px; padding: 34px 55px 38px; min-height: 0; }
+.shelf-intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 25px; margin-bottom: 32px; }
+.shelf-eyebrow { color: #dbcca9; font-size: 10px; letter-spacing: .13em; margin: 0 0 14px; }
+.shelf-intro h1 { font-family: var(--serif); font-size: clamp(24px, 2.3vw, 32px); font-weight: 400; letter-spacing: -.045em; line-height: 1.55; margin: 0; word-break: keep-all; }
+.shelf-instruction { color: #e7ddc6; font-size: 10px; line-height: 1.9; text-align: right; margin: 0 0 3px; }
+.shelf-instruction span { color: #b4b39e; font-size: 9px; }
+.bookcase { position: relative; padding: 23px 33px 7px; border-left: 12px solid #64503a; border-right: 12px solid #554632; border-top: 9px solid #736044; background: linear-gradient(90deg, #2e271fbb, #3f382980 50%, #2b271ec9); box-shadow: 0 22px 45px #0a120f55, inset 0 8px 12px #16140f80, inset 2px 0 1px #b3905638, inset -2px 0 1px #d2ac7526; border-radius: 2px 2px 0 0; }
+.bookcase::after { content: ''; position: absolute; bottom: -5px; left: -12px; right: -12px; height: 10px; background: linear-gradient(#7b6244, #4b3d2a); box-shadow: 0 10px 14px #0a120f66; }
+.shelf-row { position: relative; margin-bottom: 19px; }
+.shelf-row-heading { display: flex; justify-content: space-between; align-items: center; padding: 0 9px; margin-bottom: 16px; }
+.shelf-row-heading h2 { margin: 0; font-size: 10px; color: #ded0b5; font-weight: 400; letter-spacing: .05em; }
+.shelf-row-heading h2 span { font-size: 9px; color: #b5a88d; margin-right: 15px; font-variant-numeric: tabular-nums; }
+.shelf-row-note { font-size: 9px; color: #c4b69c; letter-spacing: .04em; }
+.shelf-scroll { position: relative; z-index: 2; }
+.shelf-items { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; align-items: end; padding: 12px 0 0; }
+.shelf-book { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; min-width: 0; height: 287px; padding: 0 8px 52px; border: 0; background: none; color: #e8dfce; text-align: center; outline-offset: 1px; }
+.shelf-cover { position: relative; display: block; width: min(100%, 146px); aspect-ratio: 2/3; background: var(--cover-paper, #eadcc0); color: var(--cover-ink, #342f25); border-radius: 1px 3px 3px 1px; transform: perspective(700px) rotateY(-7deg); transform-origin: center bottom; box-shadow: -3px 3px 8px #0003, 6px 8px 14px #100e0999; transition: transform .35s ease, box-shadow .35s ease, filter .35s ease; container-type: inline-size; }
+.shelf-book[data-book="wellbeing"] .shelf-cover { width: min(100%, 158px); }
+.shelf-book:nth-child(3n) .shelf-cover { width: min(100%, 137px); transform: perspective(700px) rotateY(-6deg) rotateZ(.6deg); }
+.shelf-book:nth-child(4n) .shelf-cover { transform: perspective(700px) rotateY(-6deg) rotateZ(-.8deg); }
+.shelf-cover::before, .detail-cover-art::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 10px; z-index: 3; pointer-events: none; background: linear-gradient(90deg, #15120755, #fff2 25%, #1c16082b 45%, transparent); }
+.shelf-cover::after, .detail-cover-art::after { content: ''; position: absolute; top: 2px; bottom: 1px; left: 100%; width: 5px; background: repeating-linear-gradient(90deg, #c3b99e 0 1px, #eee5cd 1px 2px); transform: skewY(18deg); transform-origin: left; box-shadow: 2px 2px 4px #0002; border-radius: 0 2px 2px 0; }
+.shelf-cover-art { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; display: block; }
+.cover-typography { position: absolute; inset: 0; padding: 13% 13%; color: var(--cover-ink, #342f25); font-family: var(--serif); text-align: left; pointer-events: none; }
+.cover-typography h3 { font-size: 15cqw; line-height: 1.2; font-weight: 400; margin: 0; letter-spacing: .07em; }
+.cover-subtitle { display: block; font-family: var(--sans); font-size: 5.8cqw; letter-spacing: .24em; margin-top: 4cqw; }
+.cover-author { position: absolute; top: 33%; left: 13%; font-size: 5.5cqw; letter-spacing: .02em; }
+.shelf-book:hover .shelf-cover, .shelf-book:focus-visible .shelf-cover { transform: perspective(700px) rotateY(0deg) translateY(-13px); box-shadow: -4px 5px 13px #0003, 9px 17px 20px #100e09bb; filter: brightness(1.05); }
+.shelf-book.is-selected .shelf-cover { box-shadow: -3px 3px 8px #0003, 6px 8px 14px #100e0999, 0 0 0 1px #d9c288a6; }
+.shelf-book-caption { position: absolute; bottom: 0; left: -4px; right: -4px; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 34px; }
+.shelf-book-title { font-family: var(--serif); font-size: 11px; line-height: 1.3; letter-spacing: -.035em; word-break: keep-all; }
+.shelf-book-state { font-size: 8px; color: #b3ac98; letter-spacing: .04em; }
+.shelf-book[data-book="wellbeing"] .shelf-book-state { color: #e3c993; }
+.shelf-book[data-book="wellbeing"] .shelf-book-state::before { content: ''; display: inline-block; vertical-align: 1px; width: 4px; height: 4px; border-radius: 50%; background: #d5b879; margin-right: 5px; }
+.shelf-board { position: absolute; bottom: 43px; height: 13px; left: -39px; right: -39px; z-index: 1; border-radius: 1px; background: linear-gradient(#9a8059 0 1px, #8c734e 2px, #746042 4px, #4f402d 12px); box-shadow: 0 13px 14px #120f0a80, 0 1px 0 #d9b17a30 inset; }
+.shelf-empty { display: flex; align-items: flex-end; justify-content: center; height: 287px; padding-bottom: 10px; }
+.empty-caption { font-family: var(--serif); color: #b2a78c; font-size: 10px; letter-spacing: .03em; opacity: .8; }
+.mobile-shelf-hint { display: none; }
+.library-footer { min-height: 65px; }
+
+.book-dialog { width: min(800px, calc(100vw - 48px)); max-height: calc(100dvh - 48px); margin: auto; padding: 53px 46px; border: 1px solid #e1d7c3; border-radius: 4px; background: #f4efe5; color: #34392e; box-shadow: 0 35px 100px #0006; overflow: auto; color-scheme: light; }
+.book-dialog::backdrop { background: #121b14b8; backdrop-filter: blur(7px); }
+.book-dialog[open] { animation: book-appear .23s ease-out; }
+.close-book { position: absolute; top: 15px; right: 15px; color: #636753; }
+.book-detail-layout { display: grid; grid-template-columns: 228px minmax(0, 1fr); gap: 47px; align-items: center; }
+.detail-cover-stage { position: relative; padding: 8px 5px 18px; }
+.detail-cover-button { position: relative; padding: 0; width: 100%; display: block; aspect-ratio: 2/3; background: transparent; border: 0; box-shadow: -3px 3px 10px #3d341b22, 9px 14px 20px #3d341b38; transform: perspective(700px) rotateY(-5deg) rotateZ(-1deg); z-index: 1; }
+.detail-cover-button:disabled { opacity: 1; cursor: default; }
+.detail-cover-art { display: block; width: 100%; height: 100%; position: relative; container-type: inline-size; background: var(--cover-paper, #eadcc0); border-radius: 1px 2px 2px 1px; }
+.detail-cover-shadow { position: absolute; bottom: 0; left: 6%; right: -3%; height: 18px; background: #56452929; filter: blur(8px); border-radius: 50%; }
+.detail-book-kind { font-size: 10px; letter-spacing: .08em; color: #7c795f; margin: 0 0 18px; }
+.book-detail-copy h2 { font-family: var(--serif); font-size: 29px; font-weight: 400; line-height: 1.5; letter-spacing: -.045em; margin: 0 0 13px; word-break: keep-all; }
+.detail-book-subtitle { font-family: var(--serif); font-size: 12px; line-height: 1.7; color: #706e5b; margin: 0 0 13px; word-break: keep-all; }
+.detail-book-author { font-size: 10px; color: #74725e; margin: 0; }
+.detail-book-description { font-family: var(--serif); font-size: 13px; line-height: 1.9; word-break: keep-all; white-space: pre-line; margin: 25px 0 20px; padding-top: 21px; border-top: 1px solid #dcd6c5; }
+.detail-book-status { font-size: 10px; color: #6a6e57; margin: 0 0 17px; }
+.book-dialog .read-button { background: #3c4937; color: #fbf3dd; width: 100%; padding: 16px 18px; font-size: 12px; }
+.book-dialog .read-button:hover:not(:disabled) { background: #4d5d44; }
+.book-dialog .read-button:disabled { background: #dedace; color: #7a796b; opacity: 1; transform: none; }
+.book-dialog .read-button:disabled .icon { display: none; }
+.book-dialog .resume-label { color: #777464; font-size: 9px; line-height: 1.6; margin-top: 12px; min-height: 0; }
+@keyframes book-appear { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: none; } }
+
+@media (min-width: 1500px) {
+  .library-main.shelf-library { padding-top: 43px; padding-bottom: 48px; }
+  .shelf-cover { width: min(100%, 155px); }
+  .shelf-book[data-book="wellbeing"] .shelf-cover { width: min(100%, 166px); }
+  .shelf-book, .shelf-empty { height: 306px; }
+  .shelf-row { margin-bottom: 27px; }
+}
+@media (max-width: 1000px) {
+  .library-main.shelf-library { padding: 28px 32px 32px; }
+  .bookcase { padding: 20px 19px 7px; border-left-width: 9px; border-right-width: 9px; }
+  .bookcase::after { left: -9px; right: -9px; }
+  .shelf-board { left: -24px; right: -24px; }
+  .shelf-items { gap: 11px; }
+  .shelf-book { padding-left: 3px; padding-right: 3px; }
+  .shelf-book, .shelf-empty { height: 255px; }
+  .shelf-book-title { font-size: 10px; }
+  .shelf-intro h1 { font-size: 25px; }
+  .shelf-instruction { font-size: 9px; }
+}
+@media (max-width: 700px) {
+  .library-header { height: 74px; padding-left: 23px; padding-right: 23px; }
+  .library-main.shelf-library { display: block; padding: 25px 18px 20px; }
+  .shelf-intro { display: block; margin: 0 7px 23px; }
+  .shelf-eyebrow { font-size: 9px; margin-bottom: 12px; }
+  .shelf-intro h1 { font-size: 23px; }
+  .shelf-instruction { text-align: left; font-size: 10px; margin-top: 13px; }
+  .shelf-instruction br, .shelf-instruction span { display: none; }
+  .bookcase { padding: 19px 0 0; border-left-width: 6px; border-right-width: 6px; border-top-width: 7px; }
+  .bookcase::after { left: -6px; right: -6px; }
+  .shelf-row { margin-bottom: 22px; }
+  .shelf-row-heading { padding: 0 16px; margin-bottom: 6px; }
+  .shelf-row-heading h2 { font-size: 9px; }
+  .shelf-row-heading h2 span { font-size: 8px; margin-right: 10px; }
+  .shelf-row-note { font-size: 8px; }
+  .shelf-scroll { overflow-x: auto; scrollbar-width: thin; scrollbar-color: #9b84603d transparent; overscroll-behavior-x: contain; scroll-snap-type: x proximity; padding-top: 5px; }
+  .shelf-items { grid-template-columns: repeat(5, 137px); width: max-content; padding-left: 17px; padding-right: 24px; gap: 23px; padding-bottom: 7px; }
+  .shelf-book, .shelf-empty { height: 259px; scroll-snap-align: center; }
+  .shelf-book { padding-left: 3px; padding-right: 3px; }
+  .shelf-cover { width: 126px; }
+  .shelf-book[data-book="wellbeing"] .shelf-cover { width: 131px; }
+  .shelf-book:nth-child(3n) .shelf-cover { width: 121px; }
+  .shelf-book-title { font-size: 10px; }
+  .shelf-book-state { font-size: 8px; }
+  .shelf-board { bottom: 52px; left: -4px; right: -4px; height: 12px; }
+  .empty-caption { font-size: 9px; }
+  .mobile-shelf-hint { display: flex; justify-content: space-between; margin: 18px 6px 0; color: #c5bea9; font-size: 9px; }
+  .mobile-shelf-hint span { font-size: 14px; }
+  .library-footer { margin: 0 24px; min-height: 59px; }
+  .book-dialog { padding: 40px 25px 29px; width: min(470px, calc(100vw - 32px)); max-height: calc(100dvh - 28px); }
+  .book-detail-layout { grid-template-columns: 1fr; gap: 22px; }
+  .detail-cover-stage { width: 148px; margin: 0 auto; padding-bottom: 10px; }
+  .book-detail-copy { text-align: center; }
+  .detail-book-kind { font-size: 9px; margin-bottom: 11px; }
+  .book-detail-copy h2 { font-size: 24px; line-height: 1.45; margin-bottom: 9px; }
+  .detail-book-subtitle { font-size: 11px; margin-bottom: 10px; }
+  .detail-book-author { font-size: 9px; }
+  .detail-book-description { font-size: 12px; margin: 19px 0 16px; padding-top: 17px; }
+  .detail-book-status { margin-bottom: 14px; font-size: 9px; }
+  .book-dialog .read-button { margin: 0; }
+  .book-dialog .resume-label { font-size: 8px; margin-top: 10px; }
+}
+@media (max-width: 380px) {
+  .shelf-intro h1 { font-size: 20px; }
+  .shelf-row-note { display: none; }
+  .book-dialog { padding: 39px 22px 22px; }
+  .detail-cover-stage { width: 124px; }
+  .book-detail-layout { gap: 15px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shelf-cover, .book-dialog { animation: none !important; transition: none !important; }
+}

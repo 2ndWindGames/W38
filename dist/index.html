@@ -9,7 +9,9 @@
   <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
   <link rel="preload" href="./assets/NanumMyeongjo-Regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./shelf.css">
   <script src="./app.js" defer></script>
+  <script src="./shelf.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
@@ -29,30 +31,27 @@
     <header class="library-header">
       <a class="wordmark" href="#library"><svg class="icon"><use href="#i-book"/></svg><span>나의 서재</span></a>
       <p class="header-note">한 권씩, 나의 속도로.</p>
-      <span class="library-count">소장한 이야기 <b>01</b></span>
+      <span class="library-count">서재의 책 <b>08</b></span>
     </header>
 
-    <main id="main-content" class="library-main" tabindex="-1">
-      <div class="book-introduction">
-        <span class="eyebrow"><span class="small-line"></span>첫 번째 책</span>
-        <h1>잘 지내냐고<br> 물으면</h1>
-        <p class="book-subtitle">대답이 조금 길어질 것 같다</p>
-        <p class="book-excerpt">나는 늘 내 몫이 필요했다.<br>나는 오래, 말하지 못한 것들과 한 방에 살았다.</p>
-        <button class="read-button" id="open-book"><span id="open-book-label">책 펼치기</span><svg class="icon"><use href="#i-arrow"/></svg></button>
-        <p id="resume-label" class="resume-label">여섯 개의 이야기, 그리고 나의 자리.</p>
+    <main id="main-content" class="library-main shelf-library" tabindex="-1">
+      <div class="shelf-intro">
+        <div><p class="shelf-eyebrow">이야기가 머무는 자리</p><h1>마음이 가는 책을 꺼내 보세요.</h1></div>
+        <p class="shelf-instruction">표지를 누르면 책을 살펴볼 수 있어요.<br><span>여백은 다음 이야기를 위해 남겨 두었어요.</span></p>
       </div>
-
-      <div class="book-display">
-        <div class="display-caption"><span>작은 서재에 놓인 한 권</span><span class="caption-rule"></span></div>
-        <button id="cover-button" class="physical-book" aria-label="잘 지내냐고 물으면 책 읽기">
-          <span class="book-pages" aria-hidden="true"></span>
-          <img class="book-cover" src="./assets/book-cover.png" width="1024" height="1536" alt="잘 지내냐고 물으면 — 냉장고 선반 위 노란 겨자가 그려진 표지" fetchpriority="high">
-          <span class="book-binding" aria-hidden="true"></span>
-          <span class="cover-hint" aria-hidden="true">펼쳐 보기 <svg class="icon"><use href="#i-arrow"/></svg></span>
-        </button>
-        <div class="book-pedestal" aria-hidden="true"></div>
-        <p class="display-index"><span>01 — 06</span><span>기억에서 오늘까지</span></p>
+      <div class="bookcase" aria-label="책 진열장">
+        <section class="shelf-row" aria-labelledby="shelf-label-1">
+          <div class="shelf-row-heading"><h2 id="shelf-label-1"><span>01</span>첫 번째 선반</h2><span class="shelf-row-note">기록해 둔 마음</span></div>
+          <div class="shelf-scroll"><div id="shelf-1" class="shelf-items"></div></div>
+          <div class="shelf-board" aria-hidden="true"></div>
+        </section>
+        <section class="shelf-row" aria-labelledby="shelf-label-2">
+          <div class="shelf-row-heading"><h2 id="shelf-label-2"><span>02</span>두 번째 선반</h2><span class="shelf-row-note">아직 쓰이지 않은 이야기</span></div>
+          <div class="shelf-scroll"><div id="shelf-2" class="shelf-items"></div></div>
+          <div class="shelf-board" aria-hidden="true"></div>
+        </section>
       </div>
+      <p class="mobile-shelf-hint">선반을 옆으로 넘겨 다른 책도 만나 보세요 <span aria-hidden="true">↔</span></p>
     </main>
 
     <footer class="library-footer"><span>어떤 이야기는, 조금 천천히 꺼내게 된다.</span><span class="footer-mark">MY LITTLE LIBRARY <span>✳</span></span></footer>
@@ -81,7 +80,7 @@
       <aside class="desktop-toc" aria-label="목차">
         <img src="./assets/book-cover.png" width="1024" height="1536" alt="" class="toc-cover">
         <p class="toc-book-title">잘 지내냐고 물으면</p>
-        <p class="toc-subtitle">대답이 조금 길어질 것 같다</p>
+        <p class="toc-subtitle">대답이 조금 길어질 것 같다 · 김승제 지음</p>
         <div class="toc-heading"><span>차례</span><span>CONTENTS</span></div>
         <nav id="desktop-chapter-list" class="chapter-list" aria-label="이야기 차례"></nav>
         <p class="reading-note">마지막으로 읽은 자리를<br>이 브라우저에 기억해 둘게요.</p>
@@ -103,6 +102,28 @@
     </div>
     <footer class="reader-footer"><span>잘 지내냐고 물으면</span><span>나의 서재</span></footer>
   </section>
+
+  <dialog id="book-dialog" class="book-dialog" data-book="wellbeing" aria-labelledby="detail-book-title" aria-describedby="detail-book-description">
+    <button id="close-book" class="icon-button close-book" aria-label="책 소개 닫기"><svg class="icon"><use href="#i-close"/></svg></button>
+    <div class="book-detail-layout">
+      <div class="detail-cover-stage">
+        <button id="cover-button" class="detail-cover-button" aria-label="잘 지내냐고 물으면 책 읽기">
+          <span id="detail-cover-art" class="detail-cover-art"><img class="shelf-cover-art" src="./assets/book-cover.png" width="1024" height="1536" alt="잘 지내냐고 물으면, 김승제 지음"></span>
+        </button>
+        <span class="detail-cover-shadow" aria-hidden="true"></span>
+      </div>
+      <div class="book-detail-copy">
+        <p id="detail-book-kind" class="detail-book-kind">자전적 소설</p>
+        <h2 id="detail-book-title">잘 지내냐고 물으면</h2>
+        <p id="detail-book-subtitle" class="detail-book-subtitle">대답이 조금 길어질 것 같다</p>
+        <p id="detail-book-author" class="detail-book-author">김승제 지음</p>
+        <p id="detail-book-description" class="detail-book-description">나는 늘 내 몫이 필요했다. 나는 오래, 말하지 못한 것들과 한 방에 살았다.</p>
+        <p id="detail-book-status" class="detail-book-status">여섯 개의 이야기를 읽을 수 있어요.</p>
+        <button class="read-button" id="open-book"><span id="open-book-label">책 펼치기</span><svg class="icon"><use href="#i-arrow"/></svg></button>
+        <p id="resume-label" class="resume-label">여섯 개의 이야기, 그리고 나의 자리.</p>
+      </div>
+    </div>
+  </dialog>
 
   <dialog id="toc-dialog" class="toc-dialog" aria-labelledby="mobile-toc-heading">
     <div class="dialog-heading"><h2 id="mobile-toc-heading">차례</h2><button class="icon-button" id="close-toc" aria-label="목차 닫기"><svg class="icon"><use href="#i-close"/></svg></button></div>

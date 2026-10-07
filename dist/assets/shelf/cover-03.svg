@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600" fill="none">
+  <defs><linearGradient id="paper" x1="0" y1="0" x2="400" y2="600" gradientUnits="userSpaceOnUse"><stop stop-color="#E1D3BA"/><stop offset="1" stop-color="#CDBC9F"/></linearGradient></defs>
+  <path fill="url(#paper)" d="M0 0h400v600H0z"/>
+  <path fill="#857358" fill-opacity=".15" d="M0 0h15v600H0z"/>
+  <path stroke="#FFF7DF" stroke-opacity=".48" d="M18.5 0v600M398.5 0v600"/>
+  <path fill="#C4BD9C" d="M55 410c19-57 85-98 139-90 58 8 91-37 151-16v221H55z"/>
+  <path fill="#AFB194" d="M55 454c67-23 92-61 155-56 52 4 89-24 135-12v139H55z"/>
+  <path d="M97 528c-6-54 96-44 135-75 50-39-59-66-15-106 18-17 57-18 68-41" stroke="#F0E8D3" stroke-width="22"/>
+  <path d="M97 528c-6-54 96-44 135-75 50-39-59-66-15-106 18-17 57-18 68-41" stroke="#8C8068" stroke-opacity=".5" stroke-width="1"/>
+  <path stroke="#667459" stroke-width="2" stroke-linecap="round" d="M130 383v-64m0 35-14-16m14 7 13-14"/>
+  <path fill="#7F8B69" d="M130 282c-17 13-29 36-22 49 6 11 36 15 45-1 7-13-6-34-23-48Z"/>
+  <path stroke="#BCC19B" stroke-opacity=".7" stroke-width="1.2" d="M130 303v42m0-19-9-10m9 3 8-9"/>
+  <ellipse cx="131" cy="386" rx="20" ry="3" fill="#899171" fill-opacity=".4"/>
+  <path stroke="#737D60" stroke-linecap="round" d="m300 430 2-8m3 9 3-6m-222-28 2-7m4 9 2-5"/>
+  <path stroke="#95856A" stroke-opacity=".48" d="M55 538h290"/>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600" fill="none">
+  <defs><linearGradient id="paper" x1="0" y1="0" x2="400" y2="600" gradientUnits="userSpaceOnUse"><stop stop-color="#D6B375"/><stop offset="1" stop-color="#C6985F"/></linearGradient><clipPath id="field"><path d="M58 271h286v259H58z"/></clipPath></defs>
+  <path fill="url(#paper)" d="M0 0h400v600H0z"/>
+  <path fill="#8D653B" fill-opacity=".16" d="M0 0h15v600H0z"/>
+  <path stroke="#FBE7B9" stroke-opacity=".38" d="M18.5 0v600M398.5 0v600"/>
+  <path fill="#AF7153" d="M58 271h286v259H58z"/>
+  <path fill="#BB805C" d="M58 271h179v259H58z"/>
+  <path stroke="#DAB082" stroke-opacity=".6" d="M58 439h286M236.5 271v259"/>
+  <g clip-path="url(#field)" fill="#735945" fill-opacity=".48">
+    <path d="M356 296c-39 43-88 71-128 112-31 31-46 65-64 115" stroke="#735945" stroke-width="5" fill="none"/>
+    <ellipse cx="289" cy="330" rx="18" ry="45" transform="rotate(42 289 330)"/>
+    <ellipse cx="318" cy="376" rx="16" ry="40" transform="rotate(76 318 376)"/>
+    <ellipse cx="247" cy="353" rx="17" ry="42" transform="rotate(16 247 353)"/>
+    <ellipse cx="275" cy="419" rx="18" ry="45" transform="rotate(67 275 419)"/>
+    <ellipse cx="205" cy="407" rx="17" ry="42" transform="rotate(-18 205 407)"/>
+    <ellipse cx="224" cy="470" rx="18" ry="43" transform="rotate(68 224 470)"/>
+    <ellipse cx="171" cy="466" rx="15" ry="38" transform="rotate(-21 171 466)"/>
+  </g>
+  <path d="M100 343c12-20 21-34 32-45-1 24-8 38-32 45Z" fill="#E8CFA0"/>
+  <path stroke="#A78051" stroke-width="1.2" d="m100 343 26-35"/>
+  <path stroke="#76523A" stroke-opacity=".44" d="M102 550h199"/>
+</svg>
